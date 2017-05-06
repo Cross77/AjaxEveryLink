@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./../src/ajaxEveryLink.min.js"></script>
+    <link rel="stylesheet" href="./styles.css">
+    <title>Second Page - AjaxEveryLink Demo</title>
+</head>
+<body>
+    
+    <button onClick="btnOn()">Turn on history</button></br>
+    <button onClick="btnOff()">Turn off history</button></br>
+    <button onClick="btnClear()">Clear history</button></br>
+    <button onClick="btnClick()">Show history in console</button></br>
+    <button onClick="btnShow()">Show history state</button></br>
+
+    <a href="./first.html">Go First Page</a></br>
+
+    <div id="preloader"></div>
+    <script>
+        function btnShow(){
+            if(window.AEL.isHistoryEnabled())
+                alert('History is enabled');
+            else alert('History is disabled');
+        }
+        function btnClick(){
+            console.log(window.AEL.getHistory());
+            alert('Open console (F12)');
+        }
+        function btnOn(){
+            window.AEL.historyEnabled(true);
+            alert('History is now enabled');
+        }
+        function btnOff(){
+            window.AEL.historyEnabled(false);
+            alert('History is now disabled');
+        }
+        function btnClear(){
+            window.AEL.clearHistory();
+            alert('History is now clear');
+        }
+        // Tests
+        console.info('hi on first page !');
+        if(typeof window.test1 == 'undefined') console.info('window object is fresh');
+        else window.test1();
+        function test2(){
+            console.warn('the old window object is still exist !');
+        }
+        window.AEL.onLoad = function(){
+            document.getElementById('preloader').style.display = 'block';
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('preloader').style.display = 'none';
+            document.getElementById('preloader').addEventListener('click', function(){
+                window.AEL.Request.abort();
+                this.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./../src/ajaxEveryLink.min.js"></script>
+    <link rel="stylesheet" href="./styles.css">
+    <title>First Page - AjaxEveryLink Demo</title>
+    <style>
+        html { background-color: #777 }
+        a    { color: #ddd }
+    </style>
+</head>
+<body>
+    <a href="https://github.com/Cross77/" href="https://github.com/Cross77/">
+        <img src="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png" alt="Go Wikipedia">
+    </a><br/>
+    <a href="./second.html">Go Second Page</a>
+    <div id="preloader"></div>
+    <script>
+        // Tests
+        console.info('hi on second page !');
+        if(typeof window.test2 == 'undefined') console.info('window object is fresh');
+        else window.test2();
+        function test1(){
+            console.warn('the old window object is still exist !');
+        }
+        window.AEL.onLoad = function(){
+            document.getElementById('preloader').style.display = 'block';
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('preloader').style.display = 'none';
+            document.getElementById('preloader').addEventListener('click', function(){
+                window.AEL.Request.abort();
+                this.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
